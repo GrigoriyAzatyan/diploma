@@ -1,4 +1,4 @@
-## -------------------------- ##
+
 # Values to override for your instance.
 ## -------------------------- ##
 
@@ -113,20 +113,20 @@ image:
 ## Use Server Side Repo Config,
 ## ref: https://www.runatlantis.io/docs/server-side-repo-config.html
 ## Example default configuration
-# repoConfig: |
-#  ---
-#  repos:
-#  - id: /.*/
-#    apply_requirements: []
-#    workflow: default
-#    allowed_overrides: []
-#    allow_custom_workflows: false
-#  workflows:
-#    default:
-#      plan:
-#        steps: [init, plan]
-#      apply:
-#        steps: [apply]
+repoConfig: |
+  ---
+  repos:
+  - id: /.*/
+    apply_requirements: []
+    workflow: default
+    allowed_overrides: [workflow]
+    allow_custom_workflows: true
+  workflows:
+    default:
+      plan:
+        steps: [init, plan]
+      apply:
+        steps: [apply]
 
 # allowForkPRs enables atlantis to run on a fork Pull Requests
 allowForkPRs: false

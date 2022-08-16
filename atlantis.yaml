@@ -13,18 +13,18 @@ projects:
   autoplan:
     when_modified: ["*.tf", "../modules/**/*.tf"]
     enabled: true
-#  apply_requirements: [mergeable, approved]
-#  workflow: myworkflow
+  apply_requirements: [mergeable, approved]
+  workflow: myworkflow
 workflows:
-#  myworkflow:
-#    plan:
-#      steps:
+  myworkflow:
+    plan:
+      steps:
+      - run: my-custom-command arg1 arg2
+      - init
+      - plan:
+          extra_args: ['-backend-config="access_key=${AWS_ACCESS_KEY_ID}"','-backend-config="secret_key=${AWS_SECRET_ACCESS_KEY}"']
 #      - run: my-custom-command arg1 arg2
-#      - init
-#      - plan:
-#          extra_args: ["-lock", "false"]
-#      - run: my-custom-command arg1 arg2
-#    apply:
-#      steps:
-#      - run: echo hi
-#      - apply
+    apply:
+      steps:
+      - run: echo hi
+      - apply
