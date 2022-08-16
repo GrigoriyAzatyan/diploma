@@ -75,11 +75,11 @@ github:
  # gitconfigSecretName: 'mygitconfigsecret'
 
 # To specify AWS credentials to be mapped to ~/.aws:
-# aws:
-#   credentials: |
-#     [default]
-#     aws_access_key_id=YOUR_ACCESS_KEY_ID
-#     aws_secret_access_key=YOUR_SECRET_ACCESS_KEY
+aws:
+  credentials: |
+     [default]
+     aws_access_key_id={{ .Values.AWS_ACCESS_KEY_ID }}
+     aws_secret_access_key={{ .Values.AWS_SECRET_ACCESS_KEY }}
 #     region=us-east-1
 #   config: |
 #     [profile a_role_to_assume]
@@ -282,7 +282,12 @@ serviceAccount:
 
 # Optionally specify additional environment variables to be populated from Kubernetes secrets.
 # Useful for passing in TF_VAR_foo or other secret environment variables from Kubernetes secrets.
-environmentSecrets: []
+#environmentSecrets:
+#   - name: AWS_SECRET_ACCESS_KEY
+#     value: "{{ .Values.AWS_SECRET_ACCESS_KEY }}"
+#   - name: AWS_ACCESS_KEY_ID
+#     value: "{{ .Values.AWS_ACCESS_KEY_ID }}"
+
 # environmentSecrets:
 #   - name: THE_ENV_VAR
 #     secretKeyRef:
