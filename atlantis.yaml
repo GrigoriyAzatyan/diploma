@@ -1,7 +1,7 @@
 ---
 version: 3
 automerge: true
-delete_source_branch_on_merge: true
+# delete_source_branch_on_merge: true
 parallel_plan: true
 parallel_apply: true
 projects:
@@ -9,7 +9,7 @@ projects:
   dir: terraform
   workspace: default
   terraform_version: v1.2.4
-  delete_source_branch_on_merge: true
+# delete_source_branch_on_merge: true
   autoplan:
     when_modified: ["*.tf", "../modules/**/*.tf"]
     enabled: true
