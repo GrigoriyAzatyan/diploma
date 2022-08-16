@@ -21,7 +21,7 @@ workflows:
       steps:
 #      - run: my-custom-command arg1 arg2
        - init:
-          extra_args: ['-backend-config="access_key=${AWS_ACCESS_KEY_ID}"','-backend-config="secret_key=${AWS_SECRET_ACCESS_KEY}"','-upgrade'] 
+          extra_args: ['-upgrade'] 
        - plan
 #      - run: my-custom-command arg1 arg2
     apply:
