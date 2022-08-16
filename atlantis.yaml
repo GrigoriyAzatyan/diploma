@@ -19,7 +19,7 @@ workflows:
   myworkflow:
     plan:
       steps:
-      - run: my-custom-command arg1 arg2
+#      - run: my-custom-command arg1 arg2
       - init
       - plan:
           extra_args: ['-backend-config="access_key=${AWS_ACCESS_KEY_ID}"','-backend-config="secret_key=${AWS_SECRET_ACCESS_KEY}"']
