@@ -7,14 +7,17 @@ terraform {
   }
 }
 
+variable "YC_ACCESS_KEY" {}
+variable "YC_SECRET_KEY" {} 
+
 terraform {
   backend "s3" {
     endpoint = "storage.yandexcloud.net"
     bucket = "netology-azatyan"
     region = "ru-central1"
     key = "terraform/backend.tfstate"
-    access_key = $YC_ACCESS_KEY
-    secret_key = $YC_SECRET_KEY
+    access_key = var.YC_ACCESS_KEY
+    secret_key = var.YC_SECRET_KEY
     skip_region_validation = true
     skip_credentials_validation = true
    }
