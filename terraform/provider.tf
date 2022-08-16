@@ -16,8 +16,6 @@ terraform {
     bucket = "netology-azatyan"
     region = "ru-central1"
     key = "terraform/backend.tfstate"
-    access_key = var.YC_ACCESS_KEY
-    secret_key = var.YC_SECRET_KEY
     skip_region_validation = true
     skip_credentials_validation = true
    }
