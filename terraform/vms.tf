@@ -145,7 +145,7 @@ resource "local_file" "internal_ip_kubespray" {
     file_permission = "0644"
 }
 
-resource "local_file" "internal_ip_kubespray2" {
+resource "local_file" "internal_ip_kubespray3" {
     content  = yandex_compute_instance.kubespray.network_interface.0.ip_address
     filename = "./outputs/internal_ip_kubespray2.txt"
     file_permission = "0644"
