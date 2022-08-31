@@ -1,0 +1,8 @@
+---
+all:
+  hosts:
+    jenkins:
+      ansible_host: 62.84.126.220
+      ansible_connection: ssh
+      ansible_user: ubuntu
+

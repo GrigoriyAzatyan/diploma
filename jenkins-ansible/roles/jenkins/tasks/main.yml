@@ -1,0 +1,72 @@
+---
+- name: Copy install.sh
+  become: true
+  template:
+    src: install.sh.j2
+    mode: 0755
+    dest: /opt/install.sh
+
+- name: Add an apt signing key and Repository
+  become: true
+  shell: /opt/install.sh
+
+- name: Update cache
+  become: true
+  apt:
+    update_cache: 'yes'
+
+- name: install fontconfig
+  become: true
+  apt:
+    name: fontconfig
+    state: present
+
+- name: install openjdk
+  become: true
+  apt:
+    name: openjdk-11-jre
+    state: present
+
+- name: install jenkins
+  become: true
+  apt:
+    name: jenkins
+    state: present
+
+- name: install git
+  become: true
+  apt:
+    name: git
+    state: present
+
+- file:
+    path: /jenkins
+    owner: ubuntu
+    group: ubuntu
+    state: directory
+    mode: 0755
+
+- name: start jenkins
+  become: true
+  systemd:
+    name: jenkins
+    state: started
+
+- name: enable jenkins
+  become: true
+  systemd:
+    name: jenkins
+    enabled: true
+
+- name: sleep for 30 seconds and continue with play
+  wait_for: timeout=30
+  delegate_to: localhost
+
+- name: init password jenkins
+  shell: cat /var/lib/jenkins/secrets/initialAdminPassword
+  changed_when: false
+  register: result
+
+- name: print init password jenkins
+  debug:
+    var: result.stdout
