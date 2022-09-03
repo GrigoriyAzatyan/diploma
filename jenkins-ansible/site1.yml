@@ -1,0 +1,11 @@
+---
+- name: Prepare Kubectl and CSR
+  hosts: jenkins
+  tasks:
+  - import_role:
+      name: prepare-kubectl
+
+
+
+
+

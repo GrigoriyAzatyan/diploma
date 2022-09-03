@@ -1,0 +1,60 @@
+---
+- name: Copy install.sh
+  become: true
+  template:
+    src: kube-install.sh.j2
+    mode: 0755
+    dest: /opt/kube-install.sh
+
+- name: Install Kubectl
+  become: true
+  shell: /opt/kube-install.sh
+  
+- name: Chown directory 
+  become: true
+  file:
+    path: /jenkins/ssl
+    owner: jenkins
+    group: jenkins
+    state: directory
+    mode: 0775
+
+- name: Generate OpenSSL Config
+  become: true
+  template:
+    src: csr.cnf.j2
+    mode: 0644
+    dest: /jenkins/ssl/csr.cnf
+
+- name: Generate key & csr
+  become: true
+  shell: openssl genrsa -out jenkins.key 4096 && openssl req -config ./csr.cnf -new -key jenkins.key -nodes -out jenkins.csr
+  args:
+    chdir: /jenkins/ssl
+
+- name: Chown key
+  become: true
+  file:
+    path: /jenkins/ssl/jenkins.key
+    owner: jenkins
+    group: jenkins
+    mode: 0644
+
+- name: Chown csr
+  become: true
+  file:
+    path: /jenkins/ssl/jenkins.csr
+    owner: jenkins
+    group: jenkins
+    mode: 0644
+
+- name: copy csr to host
+  become: yes
+  fetch:
+    src: /jenkins/ssl/jenkins.csr
+    dest: /tmp
+  register: copy	
+
+- name: print result
+  debug:
+    var: copy

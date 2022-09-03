@@ -1,11 +1,15 @@
 ---
 - name: Install Jenkins
   hosts: jenkins
-  gather_facts: false
   become: true
   tasks:
   - import_role:
       name: jenkins
   - import_role:
       name: docker
+
+
+
+
+
 

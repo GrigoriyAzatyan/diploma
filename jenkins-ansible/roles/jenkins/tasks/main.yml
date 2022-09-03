@@ -41,8 +41,8 @@
 
 - file:
     path: /jenkins
-    owner: ubuntu
-    group: ubuntu
+    owner: jenkins
+    group: jenkins
     state: directory
     mode: 0755
 
@@ -61,6 +61,10 @@
 - name: sleep for 30 seconds and continue with play
   wait_for: timeout=30
   delegate_to: localhost
+
+- name: Add jenkins user to sudo group
+  become: true
+  shell: echo "jenkins ALL=(ALL) NOPASSWD:ALL" >> /etc/sudoers
 
 - name: init password jenkins
   shell: cat /var/lib/jenkins/secrets/initialAdminPassword
