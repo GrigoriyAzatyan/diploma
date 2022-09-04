@@ -1,0 +1,2 @@
+---
+base64_command: cat /tmp/jenkins.csr | base64 | tr -d '\n'

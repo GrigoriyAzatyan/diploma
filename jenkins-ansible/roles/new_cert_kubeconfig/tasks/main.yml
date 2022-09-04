@@ -1,0 +1,65 @@
+---
+- name: Install jq
+  become: true
+  apt:
+    name: jq
+    state: latest
+
+- name: Copy csr to Kubernetes
+  copy:
+    src: /tmp/jenkins/jenkins/ssl/jenkins.csr
+    dest: /tmp/jenkins.csr
+    mode: 0644
+
+- name: Copy csr.yaml
+  become: true
+  template:
+    src: csr.yaml.j2
+    mode: 0644
+    dest: /tmp/csr.yaml
+
+- name: Copy role.yaml
+  become: true
+  template:
+    src: role.yaml.j2
+    mode: 0644
+    dest: /tmp/role.yaml
+
+- name: Copy role-binding.yaml
+  become: true
+  template:
+    src: role-binding.yaml.j2
+    mode: 0644
+    dest: /tmp/role-binding.yaml
+
+- name: Copy kubeconfig.tpl
+  become: true
+  template:
+    src: kubeconfig.tpl.j2
+    mode: 0644
+    dest: /tmp/kubeconfig.tpl
+
+- name: Copy script for kubeconfig
+  become: true
+  template:
+    src: kubeconfig.sh.j2
+    mode: 0755
+    dest: /tmp/kubeconfig.sh
+
+- name: Generate kubectl
+  become: true
+  shell: /tmp/kubeconfig.sh
+  args:
+    chdir: /tmp
+    executable: /bin/bash
+
+- name: copy kubeconfig to host
+  become: yes
+  fetch:
+    src: /tmp/kubeconfig
+    dest: /tmp
+  register: copy
+
+- name: print result
+  debug:
+    var: copy
