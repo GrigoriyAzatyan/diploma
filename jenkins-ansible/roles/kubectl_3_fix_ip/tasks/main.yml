@@ -1,0 +1,3 @@
+---
+- name: Fix IP in Kubeconfig
+  shell: cat /tmp/cp1/tmp/kubeconfig | sed s/127.0.0.1/`cat ../terraform/outputs/internal_ip_cp1.txt`/ > /tmp/kubeconfig

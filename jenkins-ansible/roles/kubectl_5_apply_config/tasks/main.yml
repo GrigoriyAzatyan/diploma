@@ -1,0 +1,15 @@
+---
+- name: Copy script
+  template:
+    src: install_key.sh.j2
+    mode: 0755
+    dest: /tmp/install_key.sh
+    owner: jenkins
+    group: jenkins
+
+- name: Add key to kubeconfig
+  shell: /tmp/install_key.sh
+
+- name: Check result
+  shell: kubectl version
+  ignore_errors: true

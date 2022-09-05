@@ -1,0 +1,3 @@
+#!/bin/bash
+export KUBECONFIG=/var/lib/jenkins/.kube/config
+kubectl config set-credentials jenkins --client-key=/jenkins/ssl/jenkins.key --embed-certs=true

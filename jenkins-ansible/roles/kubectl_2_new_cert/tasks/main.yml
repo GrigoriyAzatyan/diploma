@@ -32,6 +32,14 @@
     mode: 0644
     dest: /tmp/role-binding.yaml
 
+- name: Copy namespace.yaml
+  become: true
+  template:
+    src: namespace.yaml.j2
+    mode: 0644
+    dest: /tmp/namespace.yaml
+
+
 - name: Copy kubeconfig.tpl
   become: true
   template:

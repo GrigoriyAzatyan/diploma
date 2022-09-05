@@ -1,0 +1,30 @@
+---
+- name: Prepare Kubectl and CSR
+  hosts: jenkins
+  tasks:
+  - import_role:
+      name: kubectl_1_prepare
+
+- name: Sign cert and create Kubeconfig
+  hosts: cp1
+  tasks:
+  - import_role:
+      name: kubectl_2_new_cert
+
+- name: Fix IP in Kubeconfig
+  hosts: 127.0.0.1
+  tasks:
+  - import_role:
+      name: kubectl_3_fix_ip
+
+- name: Copy Kubeconfig to jenkins host
+  hosts: jenkins
+  tasks:
+  - import_role:
+      name: kubectl_4_config_to_jenkins
+
+- name: Apply Kubeconfig on Jenkins host
+  hosts: jenkins_without_sudo
+  tasks:
+  - import_role:
+      name: kubectl_5_apply_config

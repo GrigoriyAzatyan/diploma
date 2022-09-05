@@ -62,10 +62,6 @@
   wait_for: timeout=30
   delegate_to: localhost
 
-- name: Add jenkins user to sudo group
-  become: true
-  shell: echo "jenkins ALL=(ALL) NOPASSWD:ALL" >> /etc/sudoers
-
 - name: init password jenkins
   shell: cat /var/lib/jenkins/secrets/initialAdminPassword
   changed_when: false

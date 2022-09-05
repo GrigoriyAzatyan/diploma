@@ -28,7 +28,7 @@
 
 - name: Generate key & csr
   become: true
-  shell: openssl genrsa -out jenkins.key 4096 && openssl req -config ./csr.cnf -new -key jenkins.key -nodes -out jenkins.csr
+  shell: openssl genrsa -out jenkins.key 4096 && openssl req -config ./csr.cnf -new -key jenkins.key -days 365 -nodes -out jenkins.csr
   args:
     chdir: /jenkins/ssl
 
