@@ -9,7 +9,7 @@
   hosts: cp1
   tasks:
   - import_role:
-      name: kubectl_2_new_cert
+      name: kubectl_2_create_kubeconfig
 
 - name: Fix IP in Kubeconfig
   hosts: 127.0.0.1

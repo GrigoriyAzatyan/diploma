@@ -17,7 +17,7 @@ spec:
         app: static-page
     spec:
       containers:
-        - image: gregory78/static-page:$TAG
+        - image: gregory78/static-page:${TAG}
           imagePullPolicy: IfNotPresent
           name: static-page
 
