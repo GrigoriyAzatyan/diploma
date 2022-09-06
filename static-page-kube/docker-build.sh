@@ -1,7 +1,7 @@
 #!/bin/bash
 
 echo GIT_BRANCH: $GIT_BRANCH
-export TAG=${GIT_BRANCH:12}
+export TAG=`echo $GIT_BRANCH | grep -Eo 'v[0-9\.]+'`
 echo TAG: $TAG
 docker build -t gregory78/static-page:$TAG .
 cat /jenkins/docker.pwd | docker login --username gregory78 --password-stdin
