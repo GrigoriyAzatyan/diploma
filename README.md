@@ -128,6 +128,7 @@ monitoring    prometheus-operator-58974d75dd-9bg4w   2/2     Running   22 (108m 
 ![](https://github.com/GrigoriyAzatyan/devops-netology/blob/main/atlantis_webhook.png)
 
 - Видим новые комментарии в Pull-request-е. Результат неудачный, но к выводу стоит присмотреться:
+
 ![](https://github.com/GrigoriyAzatyan/devops-netology/blob/main/atlantis_403.png)
 
 См. также вывод `kubectl logs -f atlantis-0 -n atlantis`:
