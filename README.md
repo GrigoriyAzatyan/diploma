@@ -118,15 +118,44 @@ monitoring    prometheus-operator-58974d75dd-9bg4w   2/2     Running   22 (108m 
 ### Если на первом этапе вы не воспользовались Terraform Cloud, то задеплойте в кластер atlantis для отслеживания изменений инфраструктуры.
 
 Что сделано:
-* В кластере развернут Atlantis, интерфейс которого опубликован по URL http://51.250.13.12;
-* В Github-репозитории настроен вебхук на URL http://51.250.13.12/events, реагирующий на все события;
-* При создании pull-request 
+* В кластере развернут Atlantis с помощью Helm, на основе [конфигурационного файла](https://github.com/GrigoriyAzatyan/diploma/blob/master/atlantis.yaml) и [манифестов](https://github.com/GrigoriyAzatyan/diploma/tree/master/atlantis-helm). Интерфейс Atlantis опубликован по URL http://51.250.13.12;
+* В Github-репозитории настроен вебхук на URL http://51.250.13.12/events, реагирующий на любые события.
 
-
-* В кластере развернут atlantis для отслеживания изменений инфраструктуры.
 Пример работы:
+- Создаем новую ветку test01 и Pull-request;
+- редактируем один из файлов .tf в папке terraform;
+- Видим, что Github успешно отправил вебхук:
+![](https://github.com/GrigoriyAzatyan/devops-netology/blob/main/atlantis_webhook.png)
 
+- Видим новые комментарии в Pull-request-е. Результат неудачный, но к выводу стоит присмотреться:
+![](https://github.com/GrigoriyAzatyan/devops-netology/blob/main/atlantis_403.png)
 
+См. также вывод `kubectl logs -f atlantis-0 -n atlantis`:
+
+```
+{"level":"info","ts":"2022-09-07T16:56:39.290Z","caller":"events/working_dir.go:208","msg":"creating dir \"/atlantis-data/repos/GrigoriyAzatyan/diploma/9/default\"","json":{"repo":"GrigoriyAzatyan/diploma","pull":"9"}}
+
+{"level":"info","ts":"2022-09-07T16:57:03.991Z","caller":"events/project_command_builder.go:279","msg":"successfully parsed atlantis.yaml file","json":{"repo":"GrigoriyAzatyan/diploma","pull":"9"}}
+
+{"level":"info","ts":"2022-09-07T16:57:03.992Z","caller":"events/project_command_builder.go:284","msg":"1 projects are to be planned based on their when_modified config","json":{"repo":"GrigoriyAzatyan/diploma","pull":"9"}}
+
+{"level":"info","ts":"2022-09-07T16:57:04.430Z","caller":"events/plan_command_runner.go:112","msg":"Running plans in parallel","json":{"repo":"GrigoriyAzatyan/diploma","pull":"9"}}
+
+{"level":"info","ts":"2022-09-07T16:57:04.881Z","caller":"events/project_locker.go:80","msg":"acquired lock with id \"GrigoriyAzatyan/diploma/terraform/default\"","json":{"repo":"GrigoriyAzatyan/diploma","pull":"9"}}
+
+{"level":"error","ts":"2022-09-07T16:57:09.539Z","caller":"models/shell_command_runner.go:153","msg":"running \"/usr/local/bin/terraform init -input=false -upgrade\" in \"/atlantis-data/repos/GrigoriyAzatyan/diploma/9/default/terraform\": exit status 1","json":{"repo":"GrigoriyAzatyan/diploma","pull":"9"},"stacktrace":"github.com/runatlantis/atlantis/server/core/runtime/models.(*ShellCommandRunner).RunCommandAsync.func1\n\tgithub.com/runatlantis/atlantis/server/core/runtime/models/shell_command_runner.go:153"}
+
+{"level":"error","ts":"2022-09-07T16:57:09.935Z","caller":"events/instrumented_project_command_runner.go:43","msg":"Error running plan operation: running \"/usr/local/bin/terraform init -input=false -upgrade\" in \"/atlantis-data/repos/GrigoriyAzatyan/diploma/9/default/terraform\": exit status 1\n\nInitializing the backend...\n\nInitializing provider plugins...\n- Finding yandex-cloud/yandex versions matching \"0.76.0\"...\n- Finding latest version of hashicorp/local...\n╷\n│ Error: Failed to query available provider packages\n│ \n│ Could not retrieve the list of available versions for provider\n│ yandex-cloud/yandex: could not connect to registry.terraform.io: Failed to\n│ request discovery document: 403 Forbidden\n╵\n\n╷\n│ Error: Failed to query available provider packages\n│ \n│ Could not retrieve the list of available versions for provider\n│ hashicorp/local: could not connect to registry.terraform.io: Failed to\n│ request discovery document: 403 Forbidden\n╵\n\n","json":{"repo":"GrigoriyAzatyan/diploma","pull":"9"},"stacktrace":"github.com/runatlantis/atlantis/server/events.RunAndEmitStats\n\tgithub.com/runatlantis/atlantis/server/events/instrumented_project_command_runner.go:43\ngithub.com/runatlantis/atlantis/server/events.(*InstrumentedProjectCommandRunner).Plan\n\tgithub.com/runatlantis/atlantis/server/events/instrumented_project_command_runner.go:13\ngithub.com/runatlantis/atlantis/server/events.runProjectCmdsParallel.func1\n\tgithub.com/runatlantis/atlantis/server/events/project_command_pool_executor.go:28"}
+
+{"level":"info","ts":"2022-09-07T16:57:09.935Z","caller":"events/plan_command_runner.go:119","msg":"deleting plans because there were errors and automerge requires all plans succeed","json":{"repo":"GrigoriyAzatyan/diploma","pull":"9"}}
+```
+
+То есть, ключевая проблема здесь следующая: terraform пытается постучаться на registry.terraform.io и получает 403 Forbidden, что видимо является следствием антироссийских санкций:
+
+**Could not retrieve the list of available versions for provider\n│ yandex-cloud/yandex: could not connect to registry.terraform.io: Failed to\n│ request discovery document: 403 Forbidden**
+
+Пробуем открыть https://registry.terraform.io/ в браузере - догадка подтверждается:
+![](https://github.com/GrigoriyAzatyan/devops-netology/blob/main/hashicorp.png)
 
 
 ## Этап 4. Установка и настройка CI/CD
