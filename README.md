@@ -115,7 +115,7 @@ monitoring    prometheus-operator-58974d75dd-9bg4w   2/2     Running   22 (108m 
 
 * Http доступ к тестовому приложению: http://51.250.80.230:30000/
 
-### Если на первом этапе вы не воспользовались Terraform Cloud, то задеплойте в кластер atlantis для отслеживания изменений инфраструктуры.
+### 4.1. Если на первом этапе вы не воспользовались Terraform Cloud, то задеплойте в кластер atlantis для отслеживания изменений инфраструктуры.
 
 Что сделано:
 * В кластере развернут Atlantis с помощью Helm, на основе [конфигурационного файла](https://github.com/GrigoriyAzatyan/diploma/blob/master/atlantis.yaml) и [манифестов](https://github.com/GrigoriyAzatyan/diploma/tree/master/atlantis-helm). Интерфейс Atlantis опубликован по URL http://51.250.13.12;
@@ -491,7 +491,7 @@ static-page   1/1     1            1           31h   static-page   gregory78/sta
 
 * Репозиторий с конфигурационными файлами Terraform и готовность продемонстрировать создание всех ресурсов с нуля: https://github.com/GrigoriyAzatyan/diploma/tree/master/terraform
 
-* [Пример pull request с комментариями созданными atlantis'ом или снимки экрана из Terraform Cloud](https://github.com/GrigoriyAzatyan/diploma/edit/master/README.md#%D0%B5%D1%81%D0%BB%D0%B8-%D0%BD%D0%B0-%D0%BF%D0%B5%D1%80%D0%B2%D0%BE%D0%BC-%D1%8D%D1%82%D0%B0%D0%BF%D0%B5-%D0%B2%D1%8B-%D0%BD%D0%B5-%D0%B2%D0%BE%D1%81%D0%BF%D0%BE%D0%BB%D1%8C%D0%B7%D0%BE%D0%B2%D0%B0%D0%BB%D0%B8%D1%81%D1%8C-terraform-cloud-%D1%82%D0%BE-%D0%B7%D0%B0%D0%B4%D0%B5%D0%BF%D0%BB%D0%BE%D0%B9%D1%82%D0%B5-%D0%B2-%D0%BA%D0%BB%D0%B0%D1%81%D1%82%D0%B5%D1%80-atlantis-%D0%B4%D0%BB%D1%8F-%D0%BE%D1%82%D1%81%D0%BB%D0%B5%D0%B6%D0%B8%D0%B2%D0%B0%D0%BD%D0%B8%D1%8F-%D0%B8%D0%B7%D0%BC%D0%B5%D0%BD%D0%B5%D0%BD%D0%B8%D0%B9-%D0%B8%D0%BD%D1%84%D1%80%D0%B0%D1%81%D1%82%D1%80%D1%83%D0%BA%D1%82%D1%83%D1%80%D1%8B)
+* [Пример pull request с комментариями созданными atlantis'ом или снимки экрана из Terraform Cloud](###4.1)
 
 
 
