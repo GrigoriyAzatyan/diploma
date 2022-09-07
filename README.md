@@ -109,10 +109,11 @@ monitoring    prometheus-operator-58974d75dd-9bg4w   2/2     Running   22 (108m 
 
 * Http доступ к web интерфейсу grafana: http://51.250.13.12:3000
 
-![Дашборды в grafana отображающие состояние Kubernetes кластера](https://github.com/GrigoriyAzatyan/devops-netology/blob/main/grafana-cluster.png)
+* Дашборды в grafana, отображающие состояние Kubernetes кластера: 
 
+![](https://github.com/GrigoriyAzatyan/devops-netology/blob/main/grafana-cluster.png)
 
-[Http доступ к тестовому приложению](http://51.250.80.230:30000/).
+* Http доступ к тестовому приложению: http://51.250.80.230:30000/
 
 
 
