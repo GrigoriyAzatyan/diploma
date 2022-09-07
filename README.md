@@ -160,9 +160,25 @@ monitoring    prometheus-operator-58974d75dd-9bg4w   2/2     Running   22 (108m 
 
 ## Этап 4. Установка и настройка CI/CD
 
-Что выполнено:
+* Интерфейс ci/cd сервиса (Jenkins) доступен по http: http://62.84.126.220:8080/
 
-* Интерфейс ci/cd сервиса (Jenkins) доступен по http: 
-При любом коммите в репозиторие с тестовым приложением происходит сборка и отправка в регистр Docker образа.
-При создании тега (например, v1.0.0) происходит сборка и отправка с соответствующим label в регистр, а также деплой соответствующего Docker образа в кластер Kubernetes.
+### Условие 1. При любом коммите в репозиторий с тестовым приложением происходит сборка и отправка в регистр Docker образа.
+
+#### Что выполнено:
+
+* На предварительно созданной с помощью Terraform машине развернуты Jenkins и Docker с помощью:
+    *  [Ansible-playbook](https://github.com/GrigoriyAzatyan/diploma/blob/master/jenkins-ansible/install_jenkins.yml);
+    *  Самостоятельно написанных ролей [jenkins](https://github.com/GrigoriyAzatyan/diploma/tree/master/jenkins-ansible/roles/jenkins) и [docker](https://github.com/GrigoriyAzatyan/diploma/blob/master/jenkins-ansible/roles/docker/tasks/main.yml)
+
+* В развернутом Jenkins создано задание "Docker", использующее плагины Git и Docker. В настройках задания задействован параметр "Trigger builds remotely (e.g., from scripts)", позволяющий вызывать вебхуком запуск конкретно данного задания с помощью Application Token;
+
+* В Github настроен вебхук по шаблону http://admin:<api_token>@62.84.126.220:8080/job/Docker/build?token=<Application Token>, вызывающий запуск сборки. 
+  
+#### Проверяем работу:   
+
+  
+  
+  
+
+### Условие 2. При создании тега (например, v1.0.0) происходит сборка и отправка с соответствующим label в регистр, а также деплой соответствующего Docker образа в кластер Kubernetes.
 
