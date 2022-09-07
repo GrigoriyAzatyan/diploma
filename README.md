@@ -475,7 +475,7 @@ Finished: SUCCESS
 
  ![](https://github.com/GrigoriyAzatyan/devops-netology/blob/main/Dockerhub_2.png)
 
-- В Kubernetes обновилась версия Dployment "static-page":
+- В Kubernetes обновилась версия Deployment "static-page":
 
 ```
 # kubectl get deploy -n jenkins -o wide
