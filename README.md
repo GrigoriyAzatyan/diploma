@@ -26,3 +26,5 @@ jenkins | 2|4|30|192.168.10.19|62.84.126.220|ru-central1-b|
 
 ![](https://github.com/GrigoriyAzatyan/devops-netology/blob/main/S3_backend.png)
 
+## Этап 2. Создание Kubernetes кластера
+
