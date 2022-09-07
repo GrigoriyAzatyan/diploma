@@ -328,16 +328,18 @@ Finished: SUCCESS
 
 * В Jenkins создано задание "Docker2", использующее плагины Git и Docker. В настройках задания задействован параметр "Trigger builds remotely (e.g., from scripts)", позволяющий вызывать вебхуком запуск конкретно данного задания с помощью Application Token;
 
-* Для того, чтобы Jenkins в процессе сборки мог управлять кластером Kubernetes с помощью утилиты kubectl, написан [Ansible-playbook](https://github.com/GrigoriyAzatyan/diploma/blob/master/jenkins-ansible/setup_kubectl.yml) и ряд ролей, запускающихся последовательно на разных хостах:
+* Для того, чтобы Jenkins в процессе сборки мог управлять кластером Kubernetes с помощью утилиты kubectl, написан [Ansible-playbook](https://github.com/GrigoriyAzatyan/diploma/blob/master/jenkins-ansible/setup_kubectl.yml) и ряд [ролей](https://github.com/GrigoriyAzatyan/diploma/tree/master/jenkins-ansible/roles), запускающихся последовательно на разных хостах:
 
 |№| Имя роли | Хост назначения | Выполняемые действия|
 |-|----------|----------|----------|
 |1| kubectl_1_prepare |Jenkins |Устанавливает kubectl, генерирует закрытый ключ и запрос на сертификат (CSR)|
 |2 |kubectl_2_create_kubeconfig |Kubernetes Control Plane|Копирует CSR на Control Plane, генерирует role, role binding, namespace, kubeconfig для jenkins|
 |3 |kubectl_3_fix_ip |Локальная машина с запущенным Ansible|Исправляет "127.0.0.1" из kubeconfig на IP узла kubernetes-cp1, сохраненный из Terraform|
-|4 |kubectl_4_config_to_jenkins |jenkins |Копирует готовый kubeconfig на хост Jenkins в личную папку пользователя jenkins/.kube/config|
-|5|kubectl_5_apply_config |Kubernetes Control Plane|Добавляет в kubeconfig закрытый ключ|
+|4 |kubectl_4_config_to_jenkins |Jenkins |Копирует готовый kubeconfig на хост Jenkins в личную папку пользователя jenkins/.kube/config|
+|5|kubectl_5_apply_config |Kubernetes Control Plane|Добавляет в kubeconfig закрытый ключ, демонстрирует результат|
 
-* В Github настроен вебхук по шаблону `http://admin:<api_token>@62.84.126.220:8080/job/Docker/build?token=<Application Token>`, вызывающий запуск сборки. 
+* В Github настроен вебхук по шаблону `http://admin:<api_token>@62.84.126.220:8080/job/Docker2/build?token=<Application Token>`, вызывающий запуск сборки "Docker2". 
   
-#### Проверяем работу:   
+#### Проверяем работу:  
+- 
+
