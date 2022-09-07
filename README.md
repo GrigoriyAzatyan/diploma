@@ -173,7 +173,7 @@ monitoring    prometheus-operator-58974d75dd-9bg4w   2/2     Running   22 (108m 
 
 * В развернутом Jenkins создано задание "Docker", использующее плагины Git и Docker. В настройках задания задействован параметр "Trigger builds remotely (e.g., from scripts)", позволяющий вызывать вебхуком запуск конкретно данного задания с помощью Application Token;
 
-* В Github настроен вебхук по шаблону http://admin:<api_token>@62.84.126.220:8080/job/Docker/build?token=<Application Token>, вызывающий запуск сборки. 
+* В Github настроен вебхук по шаблону `http://admin:<api_token>@62.84.126.220:8080/job/Docker/build?token=<Application Token>`, вызывающий запуск сборки. 
   
 #### Проверяем работу:   
 
