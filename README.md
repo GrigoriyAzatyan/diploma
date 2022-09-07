@@ -94,6 +94,8 @@ monitoring    prometheus-operator-58974d75dd-9bg4w   2/2     Running   22 (108m 
 
 ```
 
+
+
 ## Этап 3. Создание тестового приложения.
 Готовы: 
 1. Git репозиторий с [тестовым приложением](https://github.com/GrigoriyAzatyan/diploma/blob/master/public-html/index.html) и [Dockerfile](https://github.com/GrigoriyAzatyan/diploma/blob/master/Dockerfile);
@@ -114,6 +116,7 @@ monitoring    prometheus-operator-58974d75dd-9bg4w   2/2     Running   22 (108m 
 ![](https://github.com/GrigoriyAzatyan/devops-netology/blob/main/grafana-cluster.png)
 
 * Http доступ к тестовому приложению: http://51.250.80.230:30000/
+
 
 ### 4.1. Если на первом этапе вы не воспользовались Terraform Cloud, то задеплойте в кластер atlantis для отслеживания изменений инфраструктуры.
 
@@ -157,6 +160,7 @@ monitoring    prometheus-operator-58974d75dd-9bg4w   2/2     Running   22 (108m 
 
 Пробуем открыть https://registry.terraform.io/ в браузере - догадка подтверждается:
 ![](https://github.com/GrigoriyAzatyan/devops-netology/blob/main/hashicorp.png)
+
 
 
 ## Этап 4. Установка и настройка CI/CD
@@ -495,6 +499,9 @@ static-page   1/1     1            1           31h   static-page   gregory78/sta
 
 * Репозиторий с Dockerfile тестового приложения: https://github.com/GrigoriyAzatyan/diploma/blob/master/Dockerfile
 * Ссылка на собранный docker image: https://hub.docker.com/repository/docker/gregory78/static-page или `docker pull gregory78/static-page:latest`
-* Репозиторий с конфигурацией Kubernetes кластера: 
-Ссылка на тестовое приложение и веб интерфейс Grafana с данными доступа.
-Все репозитории рекомендуется хранить на одном ресурсе (github, gitlab)
+* Репозиторий с конфигурацией Kubernetes кластера: https://github.com/GrigoriyAzatyan/diploma/tree/master/kubernetes-conf
+* Ссылка на тестовое приложение: http://51.250.80.230:30000
+* Ссылка на веб интерфейс Grafana с данными доступа: Grafana: http://51.250.13.12:3000
+   * admin
+   * GiKzF77a
+
