@@ -98,3 +98,21 @@ monitoring    prometheus-operator-58974d75dd-9bg4w   2/2     Running   22 (108m 
 Готовы: 
 1. Git репозиторий с [тестовым приложением](https://github.com/GrigoriyAzatyan/diploma/blob/master/public-html/index.html) и [Dockerfile](https://github.com/GrigoriyAzatyan/diploma/blob/master/Dockerfile);
 2. [Регистр с собранным docker image](https://hub.docker.com/repository/docker/gregory78/static-page).
+
+
+## Этап 4. Подготовка cистемы мониторинга и деплой приложения
+
+Готовы:
+
+* Git репозиторий с конфигурационными файлами для настройки Kubernetes:
+   * [Конфигурационные файлы](https://github.com/GrigoriyAzatyan/diploma/tree/master/kube-monitoring/manifests) сформированы из [jsonnet-шаблона](https://github.com/GrigoriyAzatyan/diploma/blob/master/kube-monitoring/diplom.jsonnet) 
+
+* Http доступ к web интерфейсу grafana: http://51.250.13.12:3000
+
+![](https://github.com/GrigoriyAzatyan/devops-netology/blob/main/grafana.png)
+
+Дашборды в grafana отображающие состояние Kubernetes кластера.
+Http доступ к тестовому приложению.
+
+
+
