@@ -321,7 +321,7 @@ d745f418fc70: Layer already exists
 latest: digest: sha256:f5af99ab2b0a8c659933d63901e8aca278a6379a895b62d7bc2bc8a1bf551005 size: 3037
 Finished: SUCCESS
 ```
-- в Docker Hub появилась версия с тегами "90" (номер сборки Jenkins) и "latest" образа ststic-page:
+- в Docker Hub появилась версия с тегами "90" (номер сборки Jenkins) и "latest" образа static-page:
 
  ![](https://github.com/GrigoriyAzatyan/devops-netology/blob/main/Dockerhub_1.png)
   
