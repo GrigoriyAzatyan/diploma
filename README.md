@@ -341,5 +341,146 @@ Finished: SUCCESS
 * В Github настроен вебхук по шаблону `http://admin:<api_token>@62.84.126.220:8080/job/Docker2/build?token=<Application Token>`, вызывающий запуск сборки "Docker2". 
   
 #### Проверяем работу:  
-- 
+- Выполняем `git tag -a v1.4 -m "1.4" && git push origin v1.4`;
 
+- В Jenkins запустилась сборка "Docker2":
+ 
+![](https://github.com/GrigoriyAzatyan/devops-netology/blob/main/Jenkins_2.png)
+
+- Вывод консоли сборки:
+
+```
+Started by remote host 140.82.115.117
+Started by GitHub push by GrigoriyAzatyan
+Running as SYSTEM
+Building in workspace /var/lib/jenkins/workspace/Docker2
+Selected Git installation does not exist. Using Default
+The recommended git tool is: NONE
+using credential c9ec4aaa-79f0-4472-939c-896b4aed958d
+ > git rev-parse --resolve-git-dir /var/lib/jenkins/workspace/Docker2/.git # timeout=10
+Fetching changes from the remote Git repository
+ > git config remote.origin.url https://github.com/GrigoriyAzatyan/diploma.git # timeout=10
+Fetching upstream changes from https://github.com/GrigoriyAzatyan/diploma.git
+ > git --version # timeout=10
+ > git --version # 'git version 2.25.1'
+using GIT_ASKPASS to set credentials Github credentials
+ > git fetch --tags --force --progress -- https://github.com/GrigoriyAzatyan/diploma.git +refs/tags/*:refs/remotes/origin/tags/* # timeout=10
+Seen branch in repository origin/master
+Seen branch in repository origin/new
+Seen branch in repository origin/tags/v1.1
+Seen branch in repository origin/tags/v1.11
+Seen branch in repository origin/tags/v1.12
+Seen branch in repository origin/tags/v1.13
+Seen branch in repository origin/tags/v1.14
+Seen branch in repository origin/tags/v1.15
+Seen branch in repository origin/tags/v1.16
+Seen branch in repository origin/tags/v1.17
+Seen branch in repository origin/tags/v1.18
+Seen branch in repository origin/tags/v1.19
+Seen branch in repository origin/tags/v1.20
+Seen branch in repository origin/tags/v1.21
+Seen branch in repository origin/tags/v1.22
+Seen branch in repository origin/tags/v1.23
+Seen branch in repository origin/tags/v1.24
+Seen branch in repository origin/tags/v1.25
+Seen branch in repository origin/tags/v1.26
+Seen branch in repository origin/tags/v1.27
+Seen branch in repository origin/tags/v1.28
+Seen branch in repository origin/tags/v1.29
+Seen branch in repository origin/tags/v1.3
+Seen branch in repository origin/tags/v1.31
+Seen branch in repository origin/tags/v1.32
+Seen branch in repository origin/tags/v1.33
+Seen branch in repository origin/tags/v1.34
+Seen branch in repository origin/tags/v1.35
+Seen branch in repository origin/tags/v1.36
+Seen branch in repository origin/tags/v1.4
+Seen 30 remote branches
+ > git show-ref --tags -d # timeout=10
+Checking out Revision 12aa9cddf1d7819cf5a4d65cb5d9e18aefc90133 (origin/tags/v1.4)
+ > git config core.sparsecheckout # timeout=10
+ > git checkout -f 12aa9cddf1d7819cf5a4d65cb5d9e18aefc90133 # timeout=10
+Commit message: "Update README.md"
+First time build. Skipping changelog.
+[Docker2] $ /bin/sh -xe /tmp/jenkins15288748039559498235.sh
++ chmod +x ./static-page-kube/docker-build.sh
++ /bin/bash -c ./static-page-kube/docker-build.sh
+GIT_BRANCH: origin/tags/v1.4
+TAG: v1.4
+Sending build context to Docker daemon  96.05MB
+
+Step 1/3 : FROM bitnami/nginx:latest
+ ---> acb4a50224de
+Step 2/3 : COPY ./public-html/ /app/
+ ---> Using cache
+ ---> 361c717335db
+Step 3/3 : EXPOSE 80
+ ---> Using cache
+ ---> dfd26ff452c6
+Successfully built dfd26ff452c6
+Successfully tagged gregory78/static-page:v1.4
+WARNING! Your password will be stored unencrypted in /var/lib/jenkins/.docker/config.json.
+Configure a credential helper to remove this warning. See
+https://docs.docker.com/engine/reference/commandline/login/#credentials-store
+
+Login Succeeded
+The push refers to repository [docker.io/gregory78/static-page]
+d4bde4742a5c: Preparing
+4d598999c236: Preparing
+168fedea22a4: Preparing
+6063d94b7061: Preparing
+613531f6cdb8: Preparing
+c1dee516ce06: Preparing
+439947ec892c: Preparing
+140b9320b6ea: Preparing
+59ba95c6569a: Preparing
+8add44fb46e5: Preparing
+0bc7edffadbc: Preparing
+18ba4d4ff37c: Preparing
+d745f418fc70: Preparing
+c1dee516ce06: Waiting
+439947ec892c: Waiting
+140b9320b6ea: Waiting
+59ba95c6569a: Waiting
+8add44fb46e5: Waiting
+0bc7edffadbc: Waiting
+18ba4d4ff37c: Waiting
+d745f418fc70: Waiting
+6063d94b7061: Layer already exists
+168fedea22a4: Layer already exists
+613531f6cdb8: Layer already exists
+d4bde4742a5c: Layer already exists
+4d598999c236: Layer already exists
+439947ec892c: Layer already exists
+c1dee516ce06: Layer already exists
+59ba95c6569a: Layer already exists
+140b9320b6ea: Layer already exists
+8add44fb46e5: Layer already exists
+0bc7edffadbc: Layer already exists
+18ba4d4ff37c: Layer already exists
+d745f418fc70: Layer already exists
+v1.4: digest: sha256:f5af99ab2b0a8c659933d63901e8aca278a6379a895b62d7bc2bc8a1bf551005 size: 3037
+WARNING! This will remove all dangling images.
+Are you sure you want to continue? [y/N] Total reclaimed space: 0B
+deployment.apps/static-page configured
+service/static-page unchanged
+ingress.networking.k8s.io/static-page unchanged
+Finished: SUCCESS
+```
+- в Docker Hub появилась версия с тегами "v1.4" (тег из Git) и "latest" образа ststic-page:
+
+ ![](https://github.com/GrigoriyAzatyan/devops-netology/blob/main/Dockerhub_2.png)
+
+- В Kubernetes обновилась версия Dployment "static-page":
+
+```
+# kubectl get deploy -n jenkins -o wide
+
+NAME          READY   UP-TO-DATE   AVAILABLE   AGE   CONTAINERS    IMAGES                       SELECTOR
+static-page   1/1     1            1           31h   static-page   gregory78/static-page:v1.4   app=static-page
+
+```
+
+- Веб-приложение отображает теперь новую строчку в списке товаров:
+
+![](https://github.com/GrigoriyAzatyan/devops-netology/blob/main/Result.png)
