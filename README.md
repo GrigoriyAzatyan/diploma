@@ -177,9 +177,167 @@ monitoring    prometheus-operator-58974d75dd-9bg4w   2/2     Running   22 (108m 
   
 #### Проверяем работу:   
 
-  
-  
+- Выполняем `echo "<tr><td>Конфеты 'Мишка на сервере'</td><td>кг</td><td>600</td></tr>" >> ./public-html/index.html && git add * && git commit -m "added line to index.html" && git push`
+
+- В Jenkins запустилась сборка "Docker":
+ 
+![](https://github.com/GrigoriyAzatyan/devops-netology/blob/main/Jenkins_job1.png)
+
+- Вывод консоли сборки:
+
+```
+Started by remote host 140.82.115.107
+Started by GitHub push by GrigoriyAzatyan
+Running as SYSTEM
+Building in workspace /var/lib/jenkins/workspace/Docker
+Selected Git installation does not exist. Using Default
+The recommended git tool is: NONE
+using credential c9ec4aaa-79f0-4472-939c-896b4aed958d
+ > git rev-parse --resolve-git-dir /var/lib/jenkins/workspace/Docker/.git # timeout=10
+Fetching changes from the remote Git repository
+ > git config remote.origin.url https://github.com/GrigoriyAzatyan/diploma.git # timeout=10
+Fetching upstream changes from https://github.com/GrigoriyAzatyan/diploma.git
+ > git --version # timeout=10
+ > git --version # 'git version 2.25.1'
+using GIT_ASKPASS to set credentials Github credentials
+ > git fetch --tags --force --progress -- https://github.com/GrigoriyAzatyan/diploma.git +refs/heads/*:refs/remotes/origin/* # timeout=10
+Seen branch in repository origin/25.08
+Seen branch in repository origin/master
+Seen branch in repository origin/new
+Seen branch in repository origin/tags/v1.1
+Seen branch in repository origin/tags/v1.11
+Seen branch in repository origin/tags/v1.12
+Seen branch in repository origin/tags/v1.13
+Seen branch in repository origin/tags/v1.14
+Seen branch in repository origin/tags/v1.15
+Seen branch in repository origin/tags/v1.16
+Seen branch in repository origin/tags/v1.17
+Seen branch in repository origin/tags/v1.18
+Seen branch in repository origin/tags/v1.19
+Seen branch in repository origin/tags/v1.20
+Seen branch in repository origin/test01
+Seen 15 remote branches
+ > git show-ref --tags -d # timeout=10
+Checking out Revision 4b78cecf605dfb29b6379a68fa22adcbdfba10c2 (origin/master)
+ > git config core.sparsecheckout # timeout=10
+ > git checkout -f 4b78cecf605dfb29b6379a68fa22adcbdfba10c2 # timeout=10
+Commit message: "added line to index.html"
+ > git rev-list --no-walk 5691e6815b84f1545f9a96a3ff295213122b3632 # timeout=10
+[Docker] $ docker build -t gregory78/static-page:90 --pull=true /var/lib/jenkins/workspace/Docker
+Sending build context to Docker daemon  115.6MB
+
+Step 1/3 : FROM bitnami/nginx:latest
+latest: Pulling from bitnami/nginx
+Digest: sha256:032cc09595592292d56b467ac258dba4756d93d23270b7d638ceab371be3d4ed
+Status: Image is up to date for bitnami/nginx:latest
+ ---> acb4a50224de
+Step 2/3 : COPY ./public-html/ /app/
+ ---> 361c717335db
+Step 3/3 : EXPOSE 80
+ ---> Running in 5ac946f01c7b
+Removing intermediate container 5ac946f01c7b
+ ---> dfd26ff452c6
+Successfully built dfd26ff452c6
+Successfully tagged gregory78/static-page:90
+[Docker] $ docker tag dfd26ff452c6 gregory78/static-page:latest
+[Docker] $ docker inspect dfd26ff452c6
+[Docker] $ docker push gregory78/static-page:90
+The push refers to repository [docker.io/gregory78/static-page]
+d4bde4742a5c: Preparing
+4d598999c236: Preparing
+168fedea22a4: Preparing
+6063d94b7061: Preparing
+613531f6cdb8: Preparing
+c1dee516ce06: Preparing
+439947ec892c: Preparing
+140b9320b6ea: Preparing
+59ba95c6569a: Preparing
+8add44fb46e5: Preparing
+0bc7edffadbc: Preparing
+18ba4d4ff37c: Preparing
+d745f418fc70: Preparing
+c1dee516ce06: Waiting
+439947ec892c: Waiting
+140b9320b6ea: Waiting
+8add44fb46e5: Waiting
+0bc7edffadbc: Waiting
+18ba4d4ff37c: Waiting
+d745f418fc70: Waiting
+59ba95c6569a: Waiting
+613531f6cdb8: Layer already exists
+6063d94b7061: Layer already exists
+4d598999c236: Layer already exists
+168fedea22a4: Layer already exists
+c1dee516ce06: Layer already exists
+140b9320b6ea: Layer already exists
+59ba95c6569a: Layer already exists
+439947ec892c: Layer already exists
+0bc7edffadbc: Layer already exists
+18ba4d4ff37c: Layer already exists
+d745f418fc70: Layer already exists
+8add44fb46e5: Layer already exists
+d4bde4742a5c: Pushed
+90: digest: sha256:f5af99ab2b0a8c659933d63901e8aca278a6379a895b62d7bc2bc8a1bf551005 size: 3037
+[Docker] $ docker push gregory78/static-page:latest
+The push refers to repository [docker.io/gregory78/static-page]
+d4bde4742a5c: Preparing
+4d598999c236: Preparing
+168fedea22a4: Preparing
+6063d94b7061: Preparing
+613531f6cdb8: Preparing
+c1dee516ce06: Preparing
+439947ec892c: Preparing
+140b9320b6ea: Preparing
+59ba95c6569a: Preparing
+8add44fb46e5: Preparing
+0bc7edffadbc: Preparing
+18ba4d4ff37c: Preparing
+d745f418fc70: Preparing
+c1dee516ce06: Waiting
+439947ec892c: Waiting
+140b9320b6ea: Waiting
+59ba95c6569a: Waiting
+8add44fb46e5: Waiting
+0bc7edffadbc: Waiting
+18ba4d4ff37c: Waiting
+d745f418fc70: Waiting
+168fedea22a4: Layer already exists
+d4bde4742a5c: Layer already exists
+6063d94b7061: Layer already exists
+613531f6cdb8: Layer already exists
+4d598999c236: Layer already exists
+439947ec892c: Layer already exists
+140b9320b6ea: Layer already exists
+c1dee516ce06: Layer already exists
+59ba95c6569a: Layer already exists
+8add44fb46e5: Layer already exists
+0bc7edffadbc: Layer already exists
+d745f418fc70: Layer already exists
+18ba4d4ff37c: Layer already exists
+latest: digest: sha256:f5af99ab2b0a8c659933d63901e8aca278a6379a895b62d7bc2bc8a1bf551005 size: 3037
+Finished: SUCCESS
+```
+- в Docker Hub появилась версия с тегами "90" (номер сборки Jenkins) и "latest" образа ststic-page:
+
+ ![](https://github.com/GrigoriyAzatyan/devops-netology/blob/main/Dockerhub_1.png)
   
 
 ### Условие 2. При создании тега (например, v1.0.0) происходит сборка и отправка с соответствующим label в регистр, а также деплой соответствующего Docker образа в кластер Kubernetes.
 
+#### Что выполнено:
+
+* В Jenkins создано задание "Docker2", использующее плагины Git и Docker. В настройках задания задействован параметр "Trigger builds remotely (e.g., from scripts)", позволяющий вызывать вебхуком запуск конкретно данного задания с помощью Application Token;
+
+* Для того, чтобы Jenkins в процессе сборки мог управлять кластером Kubernetes с помощью утилиты kubectl, написан [Ansible-playbook](https://github.com/GrigoriyAzatyan/diploma/blob/master/jenkins-ansible/setup_kubectl.yml) и ряд ролей, запускающихся последовательно на разных хостах:
+
+|№| Имя роли | Хост назначения | Выполняемые действия|
+|-|----------|----------|----------|
+|1| kubectl_1_prepare |Jenkins |Устанавливает kubectl, генерирует закрытый ключ и запрос на сертификат (CSR)|
+|2 |kubectl_2_create_kubeconfig |Kubernetes Control Plane|Копирует CSR на Control Plane, генерирует role, role binding, namespace, kubeconfig для jenkins|
+|3 |kubectl_3_fix_ip |Локальная машина с запущенным Ansible|Исправляет "127.0.0.1" из kubeconfig на IP узла kubernetes-cp1, сохраненный из Terraform|
+|4 |kubectl_4_config_to_jenkins |jenkins |Копирует готовый kubeconfig на хост Jenkins в личную папку пользователя jenkins/.kube/config|
+|5|kubectl_5_apply_config |Kubernetes Control Plane|Добавляет в kubeconfig закрытый ключ|
+
+* В Github настроен вебхук по шаблону `http://admin:<api_token>@62.84.126.220:8080/job/Docker/build?token=<Application Token>`, вызывающий запуск сборки. 
+  
+#### Проверяем работу:   
