@@ -490,13 +490,11 @@ static-page   1/1     1            1           31h   static-page   gregory78/sta
 ## Ссылки на необходимые материалы для сдачи задания
 
 * Репозиторий с конфигурационными файлами Terraform и готовность продемонстрировать создание всех ресурсов с нуля: https://github.com/GrigoriyAzatyan/diploma/tree/master/terraform
+* Пример pull request с комментариями созданными atlantis'ом или снимки экрана из Terraform Cloud: см. раздел 4.1.
+* Репозиторий с конфигурацией ansible, если был выбран способ создания Kubernetes кластера при помощи ansible: https://github.com/GrigoriyAzatyan/diploma/tree/master/kubespray
 
-* [Пример pull request с комментариями созданными atlantis'ом или снимки экрана из Terraform Cloud](###4.1)
-
-
-
-Репозиторий с конфигурацией ansible, если был выбран способ создания Kubernetes кластера при помощи ansible.
-Репозиторий с Dockerfile тестового приложения и ссылка на собранный docker image.
-Репозиторий с конфигурацией Kubernetes кластера.
+* Репозиторий с Dockerfile тестового приложения: https://github.com/GrigoriyAzatyan/diploma/blob/master/Dockerfile
+* Ссылка на собранный docker image: https://hub.docker.com/repository/docker/gregory78/static-page или `docker pull gregory78/static-page:latest`
+* Репозиторий с конфигурацией Kubernetes кластера: 
 Ссылка на тестовое приложение и веб интерфейс Grafana с данными доступа.
 Все репозитории рекомендуется хранить на одном ресурсе (github, gitlab)
