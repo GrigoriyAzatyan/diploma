@@ -1,7 +1,9 @@
 # Дипломная работа
 ## Азатян Г.Р.
 
-## Этап 1. Создание облачной инфраструктуры
+
+
+## Этап 1. Создание облачной инфраструктуры.
 
 ### Ожидаемые результаты:
 
@@ -26,7 +28,8 @@ jenkins | 2|4|30|192.168.10.19|62.84.126.220|ru-central1-b|
 
 ![](https://github.com/GrigoriyAzatyan/devops-netology/blob/main/S3_backend.png)
 
-## Этап 2. Создание Kubernetes кластера
+
+## Этап 2. Создание Kubernetes кластера.
 
 ### Что выполнено:   
 * Развернут кластер из 1 управляющей и 2 рабочих нод с помощью Kubespray, см. [inventory](https://github.com/GrigoriyAzatyan/diploma/tree/master/kubespray/inventory/mycluster).
@@ -91,4 +94,7 @@ monitoring    prometheus-operator-58974d75dd-9bg4w   2/2     Running   22 (108m 
 
 ```
 
+## Этап 3. Создание тестового приложения.
 
+1. Git репозиторий с [тестовым приложением]([https://github.com/GrigoriyAzatyan/diploma/tree/master/public-html](https://github.com/GrigoriyAzatyan/diploma/blob/master/public-html/index.html) и [Dockerfile](https://github.com/GrigoriyAzatyan/diploma/blob/master/Dockerfile)
+2. Регистр с собранным docker image. В качестве регистра может быть DockerHub или Yandex Container Registry, созданный также с помощью terraform.
