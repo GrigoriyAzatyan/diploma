@@ -32,11 +32,11 @@ metadata:
 spec:
   ports:
     - port: 8080
-      protocol: TCP
       targetPort: 8080
+      nodePort: 30000
   selector:
     app: static-page
-  type: LoadBalancer
+  type: NodePort
 
 ---
 apiVersion: networking.k8s.io/v1
