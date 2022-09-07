@@ -491,7 +491,7 @@ static-page   1/1     1            1           31h   static-page   gregory78/sta
 
 * Репозиторий с конфигурационными файлами Terraform и готовность продемонстрировать создание всех ресурсов с нуля: https://github.com/GrigoriyAzatyan/diploma/tree/master/terraform
 
-* [Пример pull request с комментариями созданными atlantis'ом или снимки экрана из Terraform Cloud](### Если на первом этапе вы не воспользовались Terraform Cloud, то задеплойте в кластер atlantis для отслеживания изменений инфраструктуры.)
+* [Пример pull request с комментариями созданными atlantis'ом или снимки экрана из Terraform Cloud](###Если на первом этапе вы не воспользовались Terraform Cloud, то задеплойте в кластер atlantis для отслеживания изменений инфраструктуры.)
 
 
 
