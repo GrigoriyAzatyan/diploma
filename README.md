@@ -95,6 +95,6 @@ monitoring    prometheus-operator-58974d75dd-9bg4w   2/2     Running   22 (108m 
 ```
 
 ## Этап 3. Создание тестового приложения.
-
+Готовы: 
 1. Git репозиторий с [тестовым приложением](https://github.com/GrigoriyAzatyan/diploma/blob/master/public-html/index.html) и [Dockerfile](https://github.com/GrigoriyAzatyan/diploma/blob/master/Dockerfile);
-2. (Регистр с собранным docker image](https://hub.docker.com/repository/docker/gregory78/static-page).
+2. [Регистр с собранным docker image](https://hub.docker.com/repository/docker/gregory78/static-page).
