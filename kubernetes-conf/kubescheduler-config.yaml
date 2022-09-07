@@ -1,0 +1,7 @@
+apiVersion: kubescheduler.config.k8s.io/v1beta3
+kind: KubeSchedulerConfiguration
+clientConnection:
+  kubeconfig: "/etc/kubernetes/scheduler.conf"
+leaderElection:
+  leaseDuration: 15s
+  renewDeadline: 10s
